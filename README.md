@@ -142,7 +142,7 @@ http://<node-ip>:<node-port>
 * Persistent volumes for databases
 * Config auto-detection (.env, config files)
 * RBAC and security guardrails
-* Helm chart generation
+* Cloud Deployment
 
 ---
 
