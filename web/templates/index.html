@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agentic K8s Deployer</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h2>Agentic Kubernetes Deployer</h2>
+
+    <input id="repo" type="text" placeholder="GitHub repo URL" size="60">
+    <br><br>
+    <button id="deployBtn" onclick="startDeploy()">Deploy</button>
+
+    <pre id="output"></pre>
+
+    <script>
+        function startDeploy() {
+            const repo = document.getElementById("repo").value;
+            const output = document.getElementById("output");
+            const btn = document.getElementById("deployBtn");
+
+            if (!repo) {
+                alert("Enter a repo URL");
+                return;
+            }
+
+            // 🔒 Prevent multiple clicks
+            btn.disabled = true;
+            btn.innerText = "Deploying...";
+
+            output.innerHTML = "";
+
+            fetch(`/deploy?repo=${encodeURIComponent(repo)}`)
+                .then(response => {
+                    const reader = response.body.getReader();
+                    const decoder = new TextDecoder();
+
+                    function read() {
+                        reader.read().then(({ done, value }) => {
+                            if (done) {
+                                btn.innerText = "Done";
+                                return;
+                            }
+                            output.innerHTML += decoder.decode(value);
+                            output.scrollTop = output.scrollHeight;
+                            read();
+                        });
+                    }
+                    read();
+                })
+                .catch(err => {
+                    output.innerHTML += "\nERROR: " + err;
+                    btn.disabled = false;
+                    btn.innerText = "Deploy";
+                });
+        }
+    </script>
+</body>
+</html>
