@@ -1,4 +1,4 @@
-# 🚀 Agentic AI Kubernetes Deployer
+# 🚀 Agentic AI-Driven Kubernetes Deployer
 
 An intelligent, agent-driven system that automates end-to-end Kubernetes deployments directly from a GitHub repository.
 
