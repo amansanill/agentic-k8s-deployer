@@ -146,9 +146,10 @@ http://<node-ip>:<node-port>
 
 ---
 
-## 👨‍💻 Author
+## 👨‍💻 Authors
 
-Aman Sanil
+Aman Sanil and Likhith M G
+
 Cloud & DevOps Enthusiast
 
 ---
